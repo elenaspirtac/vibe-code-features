@@ -7,29 +7,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 * { box-sizing:border-box; margin:0; padding:0; }
+html { height:100%; }
 body {
   font-family:'Press Start 2P',monospace;
   background:#0d1117; color:#f0f0f0;
-  overflow:hidden; height:100vh; width:100vw;
-}
-body::before {
-  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-  background-image:
-    radial-gradient(1px 1px at 7% 11%,  rgba(255,255,255,.8) 0%,transparent 100%),
-    radial-gradient(1px 1px at 23% 29%, rgba(255,255,255,.5) 0%,transparent 100%),
-    radial-gradient(2px 2px at 37%  6%, rgba(255,255,255,.9) 0%,transparent 100%),
-    radial-gradient(1px 1px at 55% 19%, rgba(255,255,255,.6) 0%,transparent 100%),
-    radial-gradient(1px 1px at 73%  4%, rgba(255,255,255,.7) 0%,transparent 100%),
-    radial-gradient(1px 1px at 89% 25%, rgba(255,255,255,.5) 0%,transparent 100%),
-    radial-gradient(2px 2px at 95%  9%, rgba(255,255,255,.9) 0%,transparent 100%),
-    radial-gradient(1px 1px at 44% 52%, rgba(255,255,255,.4) 0%,transparent 100%);
+  overflow:hidden; height:100%; min-height:100vh; width:100vw;
 }
 .grass { position:fixed; top:0; left:0; right:0; height:10px; z-index:300;
   background:repeating-linear-gradient(90deg,#5d9e2f 0,#5d9e2f 8px,#4a8a24 8px,#4a8a24 16px);
   box-shadow:0 3px 0 #8b5e3c,0 6px 0 #6b4a2c; }
 
 /* Slide engine */
-.deck { position:relative; width:100%; height:100%; z-index:1; }
+.deck { position:relative; width:100%; height:100vh; }
 .slide {
   position:absolute; inset:0;
   display:flex; flex-direction:column;
@@ -38,8 +27,9 @@ body::before {
   opacity:0; transform:translateX(20px);
   transition:opacity .3s, transform .3s;
   pointer-events:none; text-align:center;
+  background:#0d1117;
 }
-.slide.active { opacity:1; transform:none; pointer-events:all; }
+.slide.active { opacity:1 !important; transform:none !important; pointer-events:all; }
 .slide.exit   { opacity:0; transform:translateX(-20px); }
 
 /* Typography */
