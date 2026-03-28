@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/KE919/Downloads/authoring-main/authoring-main/**)",
+      "Bash(npx tsc:*)",
+      "Bash(npx.cmd tsc:*)"
+    ]
+  }
+}

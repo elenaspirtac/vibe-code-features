@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.frag
+
+# Secret — never commit API keys
+.env
+.env.local
+.env.*.local
+

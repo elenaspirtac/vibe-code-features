@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vibe Code Features — AEC Hackathon Copenhagen 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:'Press Start 2P',monospace;
+  background:#0d1117; color:#f0f0f0;
+  overflow:hidden; height:100vh; width:100vw;
+}
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    radial-gradient(1px 1px at 7% 11%,  rgba(255,255,255,.8) 0%,transparent 100%),
+    radial-gradient(1px 1px at 23% 29%, rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(2px 2px at 37%  6%, rgba(255,255,255,.9) 0%,transparent 100%),
+    radial-gradient(1px 1px at 55% 19%, rgba(255,255,255,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 73%  4%, rgba(255,255,255,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 89% 25%, rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(2px 2px at 95%  9%, rgba(255,255,255,.9) 0%,transparent 100%),
+    radial-gradient(1px 1px at 44% 52%, rgba(255,255,255,.4) 0%,transparent 100%);
+}
+.grass { position:fixed; top:0; left:0; right:0; height:10px; z-index:300;
+  background:repeating-linear-gradient(90deg,#5d9e2f 0,#5d9e2f 8px,#4a8a24 8px,#4a8a24 16px);
+  box-shadow:0 3px 0 #8b5e3c,0 6px 0 #6b4a2c; }
+
+/* Slide engine */
+.deck { position:relative; width:100%; height:100%; z-index:1; }
+.slide {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  padding:24px 52px 68px;
+  opacity:0; transform:translateX(20px);
+  transition:opacity .3s, transform .3s;
+  pointer-events:none; text-align:center;
+}
+.slide.active { opacity:1; transform:none; pointer-events:all; }
+.slide.exit   { opacity:0; transform:translateX(-20px); }
+
+/* Type */
+.tag  { font-size:7px; color:#555; letter-spacing:2px; margin-bottom:10px; }
+h1    { font-size:clamp(24px,3.8vw,52px); color:#ffff55; text-shadow:3px 3px #000; line-height:1.4; margin-bottom:12px; }
+h2    { font-size:clamp(15px,2.4vw,32px); color:#f0f0f0; text-shadow:2px 2px #000; line-height:1.5; margin-bottom:10px; }
+h3    { font-size:clamp(10px,1.4vw,18px); color:#55ffff; text-shadow:1px 1px #000; margin-bottom:12px; }
+.big  { font-size:clamp(36px,6vw,80px); text-shadow:4px 4px #000; line-height:1.2; margin-bottom:16px; }
+
+/* Wiki */
+.wiki {
+  background:#f5f0e0; color:#111;
+  border:4px solid #777; outline:3px solid #000;
+  box-shadow:5px 5px 0 #000;
+  padding:16px 22px; text-align:left;
+  max-width:700px; width:100%;
+}
+.wiki-title { font-size:7px; color:#000099; border-bottom:2px solid #bbb; padding-bottom:7px; margin-bottom:12px; text-decoration:underline; }
+.wiki p  { font-size:7px; line-height:2.2; }
+.wiki ul { padding-left:14px; margin-top:6px; }
+.wiki li { font-size:7px; line-height:2.2; margin-bottom:2px; }
+.r { color:#cc0000; } .g { color:#006600; } .b { color:#000099; }
+
+/* Blocks / cards */
+.blocks { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; justify-content:center; }
+.block {
+  background:#111; border:3px solid #444; outline:2px solid #000;
+  padding:14px 16px; text-align:center; min-width:120px; max-width:180px;
+}
+.bicon { font-size:30px; margin-bottom:8px; }
+.btitle { font-size:7px; color:#ffff55; margin-bottom:6px; line-height:1.6; }
+.bdesc  { font-size:6px; color:#aaa; line-height:1.8; }
+
+/* Inventory slot */
+.inv-row { display:flex; gap:4px; margin-top:14px; justify-content:center; flex-wrap:wrap; }
+.slot {
+  width:74px; height:74px; background:#c6c6c6;
+  border-top:3px solid #8b8b8b; border-left:3px solid #8b8b8b;
+  border-right:3px solid #fff; border-bottom:3px solid #fff;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:3px; position:relative;
+}
+.si { font-size:26px; }
+.sl { font-size:6px; color:#222; text-align:center; line-height:1.3; padding:0 2px; }
+.sc { position:absolute; bottom:2px; right:4px; font-size:8px; color:#fff; text-shadow:1px 1px #000; }
+
+/* Chat */
+.chat { background:#000; border:3px solid #555; padding:12px 16px; max-width:680px; width:100%; text-align:left; margin-top:14px; }
+.cl { font-size:7px; color:#666; margin-bottom:8px; }
+.cm { font-size:8px; color:#55ff55; line-height:2.2; }
+.cm span { color:#55ffff; }
+.cur { display:inline-block; width:8px; height:12px; background:#f0f0f0; animation:bl 1s step-start infinite; vertical-align:middle; }
+@keyframes bl { 50%{opacity:0} }
+
+/* XP */
+.xpw { width:100%; max-width:480px; height:14px; background:#000; border:2px solid #333; position:relative; margin-top:10px; }
+.xpf { height:100%; background:#7ec820; box-shadow:0 0 6px #7ec820; }
+.xpl { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:7px; color:#fff; text-shadow:1px 1px #000; }
+
+/* Achievement */
+.ach { background:#000; border:3px solid #ffff55; outline:2px solid #000;
+  padding:10px 14px; display:flex; align-items:center; gap:12px;
+  width:100%; max-width:600px; margin-top:8px; animation:ai .4s ease; }
+@keyframes ai { from{transform:translateY(-6px);opacity:0} to{transform:none;opacity:1} }
+.aico { font-size:24px; }
+.at2  { font-size:7px; color:#ffff55; margin-bottom:3px; }
+.ad2  { font-size:7px; color:#f0f0f0; }
+
+/* Stats */
+.stats { display:flex; gap:14px; margin-top:14px; flex-wrap:wrap; justify-content:center; }
+.stat { background:#111; border:3px solid #444; outline:2px solid #000; padding:12px 16px; text-align:center; min-width:100px; }
+.sn { font-size:clamp(16px,2.8vw,34px); text-shadow:2px 2px #000; }
+.su { font-size:6px; color:#aaa; margin-top:5px; line-height:1.8; }
+
+/* Crafting */
+.craft { display:flex; gap:18px; align-items:center; margin-top:14px; flex-wrap:wrap; justify-content:center; }
+.cgrid { display:grid; grid-template-columns:repeat(3,48px); gap:3px; }
+.cs { width:48px; height:48px; background:#8b8b8b;
+  border-top:3px solid #373737; border-left:3px solid #373737;
+  border-right:3px solid #fff; border-bottom:3px solid #fff;
+  display:flex; align-items:center; justify-content:center; font-size:18px; }
+.ca { font-size:28px; color:#ffff55; }
+.cr { width:60px; height:60px; background:#c6c6c6;
+  border-top:3px solid #8b8b8b; border-left:3px solid #8b8b8b;
+  border-right:3px solid #fff; border-bottom:3px solid #fff;
+  display:flex; align-items:center; justify-content:center; font-size:32px; }
+
+/* Hotbar */
+.hotbar { position:fixed; bottom:0; left:0; right:0; height:54px;
+  background:rgba(0,0,0,.92); border-top:3px solid #555;
+  display:flex; align-items:center; justify-content:center; z-index:300; }
+.hb { width:48px; height:48px; border:2px solid #555;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer; position:relative; transition:border-color .15s; }
+.hb:hover { border-color:#aaa; }
+.hb.on    { border-color:#fff; box-shadow:0 0 0 2px #fff; }
+.hbn      { position:absolute; top:2px; left:3px; font-size:6px; color:#fff; text-shadow:1px 1px #000; }
+.sc2 { position:fixed; top:14px; right:18px; font-size:7px; color:#444; z-index:300; }
+</style>
+</head>
+<body>
+<div class="grass"></div>
+<div class="sc2" id="sc2">1 / 9</div>
+<div class="deck">
+
+<!-- ══ 0 — COVER ══ -->
+<div class="slide active" id="s0">
+  <div class="tag">★ AEC HACKATHON COPENHAGEN 2026 ★</div>
+  <h1>VIBE CODE<br>FEATURES</h1>
+  <h3>Community Driven BIM — On The Go</h3>
+  <div style="font-size:50px;margin:10px 0">🏗️🤖⚡</div>
+  <div class="chat" style="max-width:480px">
+    <div class="cl">[ SESSION START ]</div>
+    <div class="cm">&gt; Player joined the server<br>&gt; <span>AI Tool Generator: ONLINE ✅</span><span class="cur"></span></div>
+  </div>
+</div>
+
+<!-- ══ 1 — HOOK ══ -->
+<div class="slide" id="s1">
+  <div class="tag">THE HOOK 🪝</div>
+  <h2>How much are you paying<br>for <span style="color:#ff5555">Revit</span> or <span style="color:#ff5555">ArchiCAD</span>?</h2>
+  <div class="blocks">
+    <div class="block">
+      <div class="bicon">💸</div>
+      <div class="btitle">What you PAY</div>
+      <div class="bdesc">Thousands per seat<br>every year</div>
+    </div>
+    <div class="block">
+      <div class="bicon">😴</div>
+      <div class="btitle">What you USE</div>
+      <div class="bdesc">~10% of<br>the features</div>
+    </div>
+    <div class="block">
+      <div class="bicon">❓</div>
+      <div class="btitle">What's MISSING</div>
+      <div class="bdesc">The tools you<br>wish existed</div>
+    </div>
+  </div>
+  <div style="margin-top:18px;font-size:9px;color:#ffff55;text-shadow:2px 2px #000;">
+    &gt; "How much is missing that you wish it had?"
+  </div>
+</div>
+
+<!-- ══ 2 — ORIGINAL VISION ══ -->
+<div class="slide" id="s2">
+  <div class="tag">THE ORIGINAL VISION — 1970s</div>
+  <h2>One model.<br><span style="color:#55ff55">One truth.</span></h2>
+  <div class="wiki">
+    <div class="wiki-title">Charles Eastman, 1974 — The BIM Dream</div>
+    <p>A <span class="b">single building database</span>.</p><br>
+    <p>Shared with <span class="g">every stakeholder</span>.</p><br>
+    <p>Across the <span class="g">entire lifecycle</span>.</p><br>
+    <p style="color:#666">Design. Construction. Operations.<br>One model. One truth.</p>
+  </div>
+  <div class="xpw" style="margin-top:18px">
+    <div class="xpf" style="width:100%"></div>
+    <div class="xpl">The Dream — 100% ⚡</div>
+  </div>
+</div>
+
+<!-- ══ 3 — DID WE GET THERE? ══ -->
+<div class="slide" id="s3">
+  <div class="tag">THE QUESTION</div>
+  <div class="big" style="color:#ffff55">Did we<br>get there?</div>
+  <div style="font-size:11px;color:#555;margin-top:8px;letter-spacing:2px">
+    . . .
+  </div>
+  <div style="margin-top:24px;font-size:9px;color:#aaa;max-width:500px;line-height:2.2">
+    Let the audience sit with it.
+  </div>
+</div>
+
+<!-- ══ 4 — REALITY ══ -->
+<div class="slide" id="s4">
+  <div class="tag">THE REALITY 💥</div>
+  <h2>What we got:<br><span style="color:#ff5555">Fragmentation.</span></h2>
+  <div class="inv-row">
+    <div class="slot"><div class="si">🔷</div><div class="sl">Revit<br>good at X</div></div>
+    <div class="slot"><div class="si">🦗</div><div class="sl">Grasshopper<br>good at Y</div></div>
+    <div class="slot"><div class="si">⚙️</div><div class="sl">Tekla<br>good at Z</div></div>
+    <div class="slot"><div class="si">💸</div><div class="sl">3 licences<br>3 formats</div><div class="sc">×3</div></div>
+    <div class="slot"><div class="si">📉</div><div class="sl">IFC<br>data loss</div><div class="sc">!</div></div>
+  </div>
+  <div class="wiki" style="margin-top:14px;max-width:700px">
+    <div class="wiki-title">Field Report — The Real World</div>
+    <p><span class="r">3 licences. 3 formats. 3 headaches.</span><br>For one building.</p><br>
+    <p>Construction starts → model is already <span class="r">out of date</span>.<br>
+    Changes need edits across <span class="r">multiple models,<br>multiple teams, multiple companies.</span><br>
+    Nobody can keep up.</p>
+  </div>
+</div>
+
+<!-- ══ 5 — SOLUTION ══ -->
+<div class="slide" id="s5">
+  <div class="tag">THE SOLUTION 🛠️</div>
+  <h2>Open. <span style="color:#55ff55">Community.</span><br>Vibe-coded.</h2>
+  <div class="blocks">
+    <div class="block">
+      <div class="bicon">🌐</div>
+      <div class="btitle">Open Source<br>+ Cloud</div>
+      <div class="bdesc">Native open standards.<br>Nothing to export.<br>Nothing to lose.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">🛒</div>
+      <div class="btitle">Your Workspace</div>
+      <div class="bdesc">Pick only the features<br>you need from an<br>open marketplace.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">🤖</div>
+      <div class="btitle">Vibe-Code It</div>
+      <div class="bdesc">Feature doesn't exist?<br>Generate it with AI.<br>Contribute it back.</div>
+    </div>
+  </div>
+  <div class="craft" style="margin-top:12px">
+    <div class="cgrid">
+      <div class="cs">💭</div><div class="cs">⌨️</div><div class="cs">🤖</div>
+      <div class="cs">📝</div><div class="cs">⚡</div><div class="cs">🔄</div>
+      <div class="cs">✨</div><div class="cs">💾</div><div class="cs">🏗️</div>
+    </div>
+    <div class="ca">➜</div>
+    <div style="text-align:center">
+      <div class="cr">🛠️</div>
+      <div style="font-size:6px;color:#ffff55;margin-top:5px">New BIM Tool<br>10 seconds</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 6 — TRUST ══ -->
+<div class="slide" id="s6">
+  <div class="tag">CAN YOU TRUST IT? 🛡️</div>
+  <h2>The community<br><span style="color:#ffff55">stress-tests</span> it.</h2>
+  <div class="wiki" style="max-width:700px">
+    <div class="wiki-title">Cunningham Principle + AI Governance Layer</div>
+    <p><span class="g">"The best way to get the right answer on the internet is not to ask a question — it's to post the wrong answer."</span></p><br>
+    <p>Features get reviewed, commented on,<br>and matured by the community.<br>Mechanisms prevent features from<br><span class="r">breaking your tool or project.</span></p><br>
+    <p><span class="b">IT-savvy?</span> Run it on your own infra.<br>
+    <span class="b">Not?</span> Buy it managed. Same governance either way.</p>
+  </div>
+  <div class="inv-row" style="margin-top:10px">
+    <div class="slot"><div class="si">👁️</div><div class="sl">Peer review</div></div>
+    <div class="slot"><div class="si">⭐</div><div class="sl">Community rating</div></div>
+    <div class="slot"><div class="si">🛡️</div><div class="sl">AI Gov Layer</div></div>
+    <div class="slot"><div class="si">🔒</div><div class="sl">Trust framework</div></div>
+  </div>
+</div>
+
+<!-- ══ 7 — DEMO ══ -->
+<div class="slide" id="s7">
+  <div class="tag">LIVE DEMO 🌬️</div>
+  <h2>We built a <span style="color:#55ff55">wind farm</span><br>from a prompt.</h2>
+  <div style="display:flex;flex-direction:column;gap:8px;width:100%;max-width:600px;margin-top:12px">
+    <div class="ach"><div class="aico">🌬️</div><div><div class="at2">ACHIEVEMENT UNLOCKED</div><div class="ad2">100 turbines — Horns Rev spacing — 1 click</div></div></div>
+    <div class="ach"><div class="aico">🤖</div><div><div class="at2">ACHIEVEMENT UNLOCKED</div><div class="ad2">Vibe Coder — BIM tool from plain language in 10s</div></div></div>
+    <div class="ach"><div class="aico">⚡</div><div><div class="at2">ACHIEVEMENT UNLOCKED</div><div class="ad2">AEP calculated live — 14,716 households powered</div></div></div>
+  </div>
+  <div class="chat" style="margin-top:12px;max-width:600px">
+    <div class="cl">[ TRY IT NOW ]</div>
+    <div class="cm">&gt; <span>http://localhost:4000</span><span class="cur"></span></div>
+  </div>
+</div>
+
+<!-- ══ 8 — CLOSE ══ -->
+<div class="slide" id="s8">
+  <div class="tag">THE CLOSE</div>
+  <h2>Linux. Blender. VS Code.<br><span style="color:#ffff55">Now BIM.</span></h2>
+  <div class="wiki" style="max-width:660px">
+    <div class="wiki-title">The Close</div>
+    <p>"This isn't about replacing Revit overnight.</p><br>
+    <p>It's about building something <span class="g">better, together</span> —<br>
+    <span class="g">one feature at a time.</span></p><br>
+    <p>The community that built Linux, Blender,<br>and VS Code <span class="g">can build this too.</span>"</p>
+  </div>
+  <div class="stats" style="margin-top:16px">
+    <div class="stat"><div class="sn" style="color:#55ff55">10s</div><div class="su">idea → tool</div></div>
+    <div class="stat"><div class="sn" style="color:#55ffff">∞</div><div class="su">tools possible</div></div>
+    <div class="stat"><div class="sn" style="color:#ffff55">0</div><div class="su">lines written<br>by user</div></div>
+    <div class="stat"><div class="sn" style="color:#ff55ff">v0.1</div><div class="su">alpha<br>it's real 🔥</div></div>
+  </div>
+  <div style="margin-top:12px;font-size:7px;color:#444">Made with love in Copenhagen 🇩🇰</div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- HOTBAR -->
+<div class="hotbar">
+  <div class="hb on" id="hb0" onclick="g(0)"><div class="hbn">1</div>🏠</div>
+  <div class="hb"    id="hb1" onclick="g(1)"><div class="hbn">2</div>🪝</div>
+  <div class="hb"    id="hb2" onclick="g(2)"><div class="hbn">3</div>💡</div>
+  <div class="hb"    id="hb3" onclick="g(3)"><div class="hbn">4</div>❓</div>
+  <div class="hb"    id="hb4" onclick="g(4)"><div class="hbn">5</div>💥</div>
+  <div class="hb"    id="hb5" onclick="g(5)"><div class="hbn">6</div>🛠️</div>
+  <div class="hb"    id="hb6" onclick="g(6)"><div class="hbn">7</div>🛡️</div>
+  <div class="hb"    id="hb7" onclick="g(7)"><div class="hbn">8</div>🌬️</div>
+  <div class="hb"    id="hb8" onclick="g(8)"><div class="hbn">9</div>🌟</div>
+</div>
+
+<script>
+  let c=0,t=9;
+  function g(i){
+    if(i<0||i>=t)return;
+    document.getElementById('s'+c).classList.remove('active');
+    document.getElementById('s'+c).classList.add('exit');
+    document.getElementById('hb'+c).classList.remove('on');
+    const p=c;
+    setTimeout(()=>document.getElementById('s'+p)?.classList.remove('exit'),280);
+    c=i;
+    document.getElementById('s'+c).classList.add('active');
+    document.getElementById('hb'+c).classList.add('on');
+    document.getElementById('sc2').textContent=(c+1)+' / '+t;
+  }
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();g(c+1);}
+    if(e.key==='ArrowLeft' ||e.key==='ArrowUp')               {e.preventDefault();g(c-1);}
+    if(e.key>='1'&&e.key<='9')g(parseInt(e.key)-1);
+  });
+</script>
+</body>
+</html>
