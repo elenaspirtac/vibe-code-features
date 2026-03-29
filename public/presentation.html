@@ -23,7 +23,7 @@ body {
   position:absolute; inset:0;
   display:flex; flex-direction:column;
   justify-content:center; align-items:center;
-  padding:24px 52px 68px;
+  padding:18px 48px 62px;
   opacity:0; transform:translateX(20px);
   transition:opacity .3s, transform .3s;
   pointer-events:none; text-align:center;
@@ -33,110 +33,112 @@ body {
 .slide.exit   { opacity:0; transform:translateX(-20px); }
 
 /* Typography */
-.tag  { font-size:7px; color:#555; letter-spacing:2px; margin-bottom:10px; }
-h1    { font-size:clamp(22px,3.4vw,46px); color:#ffff55; text-shadow:3px 3px #000; line-height:1.5; margin-bottom:12px; }
-h2    { font-size:clamp(13px,2.1vw,28px); color:#f0f0f0; text-shadow:2px 2px #000; line-height:1.6; margin-bottom:10px; }
-h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000; margin-bottom:12px; }
-.big  { font-size:clamp(32px,5.5vw,72px); text-shadow:4px 4px #000; line-height:1.2; margin-bottom:16px; }
+.tag  { font-size:10px; color:#555; letter-spacing:2px; margin-bottom:8px; }
+h1    { font-size:clamp(20px,3.2vw,44px); color:#ffff55; text-shadow:3px 3px #000; line-height:1.5; margin-bottom:10px; }
+h2    { font-size:clamp(14px,2.2vw,30px); color:#f0f0f0; text-shadow:2px 2px #000; line-height:1.6; margin-bottom:8px; }
+h3    { font-size:clamp(10px,1.4vw,18px); color:#55ffff; text-shadow:1px 1px #000; margin-bottom:10px; }
+.big  { font-size:clamp(32px,6vw,80px); text-shadow:4px 4px #000; line-height:1.2; margin-bottom:12px; }
 
-/* DHH Quote block */
+/* ── DHH Quote (orange) ── */
 .dhh {
   background:#1a0800; border:3px solid #ff8800; outline:2px solid #000;
   box-shadow:4px 4px 0 #000;
-  padding:12px 18px; text-align:left;
-  max-width:680px; width:100%; margin-top:12px; position:relative;
+  padding:10px 16px; text-align:left;
+  max-width:680px; width:100%; margin-top:10px; position:relative;
 }
 .dhh::before {
-  content:''; position:absolute; top:-12px; left:18px;
+  content:''; position:absolute; top:-11px; left:16px;
   width:0; height:0;
-  border-left:8px solid transparent; border-right:8px solid transparent;
-  border-bottom:12px solid #ff8800;
+  border-left:7px solid transparent; border-right:7px solid transparent;
+  border-bottom:11px solid #ff8800;
 }
-.dhh-who {
-  font-size:6px; color:#ff8800; letter-spacing:2px; margin-bottom:8px;
-  display:flex; align-items:center; gap:8px;
-}
+.dhh-who { font-size:8px; color:#ff8800; letter-spacing:1px; margin-bottom:6px; }
 .dhh-who span { color:#555; }
-.dhh-q { font-size:8px; color:#fff; line-height:2.4; }
+.dhh-q { font-size:10px; color:#fff; line-height:2.3; }
 .dhh-q em { color:#ffaa44; font-style:normal; }
+
+/* ── Antonio Quote (teal) ── */
+.ant {
+  background:#001a10; border:3px solid #00c896; outline:2px solid #000;
+  box-shadow:4px 4px 0 #000;
+  padding:10px 16px; text-align:left;
+  max-width:680px; width:100%; margin-top:10px; position:relative;
+}
+.ant::before {
+  content:''; position:absolute; top:-11px; left:16px;
+  width:0; height:0;
+  border-left:7px solid transparent; border-right:7px solid transparent;
+  border-bottom:11px solid #00c896;
+}
+.ant-who { font-size:8px; color:#00c896; letter-spacing:1px; margin-bottom:6px; }
+.ant-who span { color:#555; }
+.ant-q { font-size:10px; color:#fff; line-height:2.3; }
+.ant-q em { color:#55ffaa; font-style:normal; }
 
 /* Wiki */
 .wiki {
   background:#f5f0e0; color:#111;
   border:4px solid #777; outline:3px solid #000;
   box-shadow:5px 5px 0 #000;
-  padding:14px 20px; text-align:left;
+  padding:12px 18px; text-align:left;
   max-width:680px; width:100%;
 }
-.wiki-title { font-size:7px; color:#000099; border-bottom:2px solid #bbb; padding-bottom:6px; margin-bottom:10px; text-decoration:underline; }
-.wiki p  { font-size:7px; line-height:2.2; }
-.wiki ul { padding-left:14px; margin-top:6px; }
-.wiki li { font-size:7px; line-height:2.2; margin-bottom:2px; }
+.wiki-title { font-size:8px; color:#000099; border-bottom:2px solid #bbb; padding-bottom:5px; margin-bottom:8px; text-decoration:underline; }
+.wiki p  { font-size:8px; line-height:2.2; }
+.wiki ul { padding-left:12px; margin-top:5px; }
+.wiki li { font-size:8px; line-height:2.2; margin-bottom:2px; }
 .r { color:#cc0000; } .g { color:#006600; } .b { color:#000099; }
 
 /* Blocks */
-.blocks { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; justify-content:center; }
-.block {
-  background:#111; border:3px solid #444; outline:2px solid #000;
-  padding:12px 14px; text-align:center; min-width:120px; max-width:175px;
-}
-.bicon { font-size:28px; margin-bottom:8px; }
-.btitle { font-size:7px; color:#ffff55; margin-bottom:6px; line-height:1.6; }
-.bdesc  { font-size:6px; color:#aaa; line-height:1.8; }
+.blocks { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; justify-content:center; }
+.block { background:#111; border:3px solid #444; outline:2px solid #000; padding:10px 12px; text-align:center; min-width:120px; max-width:175px; }
+.bicon { font-size:28px; margin-bottom:6px; }
+.btitle { font-size:8px; color:#ffff55; margin-bottom:5px; line-height:1.6; }
+.bdesc  { font-size:7px; color:#aaa; line-height:1.8; }
 
 /* Inventory slot */
-.inv-row { display:flex; gap:4px; margin-top:12px; justify-content:center; flex-wrap:wrap; }
+.inv-row { display:flex; gap:4px; margin-top:10px; justify-content:center; flex-wrap:wrap; }
 .slot {
   width:72px; height:72px; background:#c6c6c6;
   border-top:3px solid #8b8b8b; border-left:3px solid #8b8b8b;
   border-right:3px solid #fff; border-bottom:3px solid #fff;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:3px; position:relative;
+  gap:2px; position:relative;
 }
 .si { font-size:24px; }
-.sl { font-size:6px; color:#222; text-align:center; line-height:1.3; padding:0 2px; }
-.sc { position:absolute; bottom:2px; right:4px; font-size:8px; color:#fff; text-shadow:1px 1px #000; }
+.sl { font-size:7px; color:#222; text-align:center; line-height:1.3; padding:0 2px; }
+.sc { position:absolute; bottom:2px; right:3px; font-size:8px; color:#fff; text-shadow:1px 1px #000; }
 
 /* Chat */
-.chat { background:#000; border:3px solid #555; padding:12px 16px; max-width:680px; width:100%; text-align:left; margin-top:12px; }
-.cl { font-size:7px; color:#666; margin-bottom:8px; }
-.cm { font-size:8px; color:#55ff55; line-height:2.4; }
+.chat { background:#000; border:3px solid #555; padding:10px 14px; max-width:680px; width:100%; text-align:left; margin-top:10px; }
+.cl { font-size:8px; color:#666; margin-bottom:6px; }
+.cm { font-size:9px; color:#55ff55; line-height:2.3; }
 .cm span { color:#55ffff; }
 .cur { display:inline-block; width:8px; height:12px; background:#f0f0f0; animation:bl 1s step-start infinite; vertical-align:middle; }
 @keyframes bl { 50%{opacity:0} }
 
 /* XP bar */
-.xpw { width:100%; max-width:480px; height:14px; background:#000; border:2px solid #333; position:relative; margin-top:10px; }
+.xpw { width:100%; max-width:460px; height:14px; background:#000; border:2px solid #333; position:relative; margin-top:8px; }
 .xpf { height:100%; background:#7ec820; box-shadow:0 0 6px #7ec820; }
-.xpl { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:7px; color:#fff; text-shadow:1px 1px #000; }
+.xpl { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:8px; color:#fff; text-shadow:1px 1px #000; }
 
 /* Achievement */
 .ach { background:#000; border:3px solid #ffff55; outline:2px solid #000;
-  padding:10px 14px; display:flex; align-items:center; gap:12px;
-  width:100%; max-width:600px; margin-top:8px; animation:ai .4s ease; }
-@keyframes ai { from{transform:translateY(-6px);opacity:0} to{transform:none;opacity:1} }
+  padding:8px 12px; display:flex; align-items:center; gap:10px;
+  width:100%; max-width:600px; margin-top:6px; }
 .aico { font-size:24px; }
-.at2  { font-size:7px; color:#ffff55; margin-bottom:3px; }
-.ad2  { font-size:7px; color:#f0f0f0; }
+.at2  { font-size:8px; color:#ffff55; margin-bottom:3px; }
+.ad2  { font-size:8px; color:#f0f0f0; }
 
 /* Stats */
-.stats { display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; justify-content:center; }
-.stat { background:#111; border:3px solid #444; outline:2px solid #000; padding:12px 16px; text-align:center; min-width:100px; }
-.sn { font-size:clamp(14px,2.6vw,32px); text-shadow:2px 2px #000; }
-.su { font-size:6px; color:#aaa; margin-top:5px; line-height:1.8; }
+.stats { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; justify-content:center; }
+.stat { background:#111; border:3px solid #444; outline:2px solid #000; padding:10px 14px; text-align:center; min-width:100px; }
+.sn { font-size:clamp(16px,2.8vw,34px); text-shadow:2px 2px #000; }
+.su { font-size:7px; color:#aaa; margin-top:4px; line-height:1.8; }
 
-/* Crafting */
-.craft { display:flex; gap:18px; align-items:center; margin-top:12px; flex-wrap:wrap; justify-content:center; }
-.cgrid { display:grid; grid-template-columns:repeat(3,46px); gap:3px; }
-.cs { width:46px; height:46px; background:#8b8b8b;
-  border-top:3px solid #373737; border-left:3px solid #373737;
-  border-right:3px solid #fff; border-bottom:3px solid #fff;
-  display:flex; align-items:center; justify-content:center; font-size:18px; }
-.ca { font-size:28px; color:#ffff55; }
-.cr { width:58px; height:58px; background:#c6c6c6;
-  border-top:3px solid #8b8b8b; border-left:3px solid #8b8b8b;
-  border-right:3px solid #fff; border-bottom:3px solid #fff;
-  display:flex; align-items:center; justify-content:center; font-size:30px; }
+/* Two-col */
+.cols { display:flex; gap:10px; width:100%; max-width:820px; align-items:flex-start; margin-top:10px; flex-wrap:wrap; justify-content:center; }
+.col  { flex:1; min-width:240px; display:flex; flex-direction:column; align-items:stretch; }
 
 /* Hotbar */
 .hotbar { position:fixed; bottom:0; left:0; right:0; height:54px;
@@ -150,9 +152,89 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
 .hbn      { position:absolute; top:2px; left:3px; font-size:6px; color:#fff; text-shadow:1px 1px #000; }
 .sc2 { position:fixed; top:14px; right:18px; font-size:7px; color:#444; z-index:300; }
 
-/* Two-col layout */
-.cols { display:flex; gap:14px; width:100%; max-width:820px; align-items:flex-start; margin-top:12px; flex-wrap:wrap; justify-content:center; }
-.col  { flex:1; min-width:260px; }
+/* Cover extras */
+.cover-date { font-size:8px; color:#555; letter-spacing:2px; margin-top:4px; }
+.tm {
+  position:absolute; text-align:center; font-size:56px; line-height:1.4;
+}
+.tm span { display:block; font-size:8px; color:#55ffff; margin-top:2px; font-family:'Press Start 2P',monospace; }
+.tm1 { animation:float1 3.2s ease-in-out infinite; }
+.tm2 { animation:float2 2.8s ease-in-out infinite 0.4s; }
+.tm3 { animation:float1 3.5s ease-in-out infinite 1.1s; }
+.tm4 { animation:float2 3.0s ease-in-out infinite 0.7s; }
+.tm5 { animation:float1 2.9s ease-in-out infinite 1.6s; }
+.tm6 { animation:float2 3.3s ease-in-out infinite 0.2s; }
+@keyframes float1 {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-8px); }
+}
+@keyframes float2 {
+  0%,100% { transform:translateY(0) rotate(0deg); }
+  50% { transform:translateY(-6px) rotate(3deg); }
+}
+
+/* Vendor icons */
+.vi {
+  position:absolute; text-align:center; z-index:10;
+  background:#1a1a2e; border:3px solid #ff5555; outline:2px solid #000;
+  padding:8px 12px; font-family:'Press Start 2P',monospace;
+  box-shadow:4px 4px 0 #000;
+}
+.vi .vn { font-size:8px; color:#ff5555; }
+.vi .vs { font-size:22px; margin-bottom:2px; }
+
+/* Laser targeting */
+.vi::before {
+  content:''; position:absolute; top:50%; left:50%;
+  width:0; height:0; border-radius:50%;
+  border:2px solid #ff0000; opacity:0;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 10px #ff0000, inset 0 0 10px #ff0000;
+}
+.vi::after {
+  content:'💥'; position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  font-size:40px; opacity:0; pointer-events:none;
+}
+.vi1 { animation:laserShoot 15s linear infinite; }
+.vi2 { animation:laserShoot 15s linear infinite 2.5s; }
+.vi3 { animation:laserShoot 15s linear infinite 5s; }
+.vi4 { animation:laserShoot 15s linear infinite 7.5s; }
+.vi5 { animation:laserShoot 15s linear infinite 10s; }
+.vi1::before { animation:laserLock 15s linear infinite; }
+.vi2::before { animation:laserLock 15s linear infinite 2.5s; }
+.vi3::before { animation:laserLock 15s linear infinite 5s; }
+.vi4::before { animation:laserLock 15s linear infinite 7.5s; }
+.vi5::before { animation:laserLock 15s linear infinite 10s; }
+.vi1::after { animation:laserBoom 15s linear infinite; }
+.vi2::after { animation:laserBoom 15s linear infinite 2.5s; }
+.vi3::after { animation:laserBoom 15s linear infinite 5s; }
+.vi4::after { animation:laserBoom 15s linear infinite 7.5s; }
+.vi5::after { animation:laserBoom 15s linear infinite 10s; }
+@keyframes laserLock {
+  0%,2% { opacity:0; width:80px; height:80px; border-color:#ff0000; }
+  4% { opacity:1; width:80px; height:80px; }
+  10% { opacity:1; width:20px; height:20px; border-color:#ff4444; box-shadow:0 0 20px #ff0000,inset 0 0 20px #ff0000; }
+  11% { opacity:0; }
+  100% { opacity:0; }
+}
+@keyframes laserShoot {
+  0%,10% { opacity:1; transform:scale(1); filter:none; }
+  11% { opacity:1; transform:scale(1.2); filter:brightness(3) saturate(0); }
+  12% { opacity:1; transform:scale(1.4); filter:brightness(5); }
+  14% { opacity:0; transform:scale(0.1) rotate(180deg); filter:brightness(0); }
+  80% { opacity:0; }
+  85% { opacity:0; transform:scale(0.5); }
+  90% { opacity:1; transform:scale(1); filter:none; }
+  100% { opacity:1; transform:scale(1); filter:none; }
+}
+@keyframes laserBoom {
+  0%,11% { opacity:0; transform:translate(-50%,-50%) scale(0); }
+  12% { opacity:1; transform:translate(-50%,-50%) scale(2); }
+  15% { opacity:1; transform:translate(-50%,-50%) scale(2.5); }
+  18% { opacity:0; transform:translate(-50%,-50%) scale(3); }
+  100% { opacity:0; }
+}
 </style>
 </head>
 <body>
@@ -161,21 +243,41 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
 <div class="deck">
 
 <!-- ══ 0 — COVER ══ -->
-<div class="slide active" id="s0">
+<div class="slide active" id="s0" style="position:relative;overflow:hidden;justify-content:flex-end;padding-bottom:18vh">
   <div class="tag">★ AEC HACKATHON COPENHAGEN 2026 ★</div>
-  <h1>YOUR BIM.<br>YOUR RULES.<br>YOUR TOOLS.</h1>
-  <h3>The BIM tool you wish existed? Build it. Share it.</h3>
-  <div style="font-size:46px;margin:8px 0">🏗️🤖⚡</div>
-  <div class="chat" style="max-width:500px">
+  <div class="big" style="color:#ff55ff;margin-bottom:0">BBB</div>
+  <div class="cover-date">29 MARCH 2026 — COPENHAGEN 🇩🇰</div>
+  <h3 style="margin-top:8px">&gt; What if we could reinvent BIM?</h3>
+  <div style="font-size:36px;margin:6px 0">🏗️🤖⚡</div>
+  <div class="chat" style="max-width:480px;margin-top:6px">
     <div class="cl">[ SESSION START ]</div>
-    <div class="cm">&gt; Player joined the server<br>&gt; Loading BIM world...<br>&gt; <span>AI Tool Generator: ONLINE ✅</span><span class="cur"></span></div>
+    <div class="cm">
+      &gt; Player joined the server<br>
+      &gt; Loading BIM world...<br>
+      &gt; <span>AI Tool Generator: ONLINE ✅</span><span class="cur"></span>
+    </div>
   </div>
+
+  <!-- Vendor icons at bottom -->
+  <div class="vi vi1" style="bottom:2%;left:4%"><div class="vs">🔷</div><div class="vn">Revit</div></div>
+  <div class="vi vi2" style="bottom:2%;left:22%"><div class="vs">⚙️</div><div class="vn">Tekla</div></div>
+  <div class="vi vi3" style="bottom:2%;left:40%"><div class="vs">✅</div><div class="vn">Solibri</div></div>
+  <div class="vi vi4" style="bottom:2%;left:58%"><div class="vs">🏠</div><div class="vn">ArchiCAD</div></div>
+  <div class="vi vi5" style="bottom:2%;left:76%"><div class="vs">🅱️</div><div class="vn">Bentley</div></div>
+
+  <!-- Floating members -->
+  <div class="tm tm1" style="top:6%;left:2%">🕵️<br><span>Ivan</span></div>
+  <div class="tm tm2" style="top:18%;right:6%">🧙‍♂️<br><span>Dima</span></div>
+  <div class="tm tm3" style="bottom:34%;left:8%">🧝‍♀️<br><span>Elena</span></div>
+  <div class="tm tm4" style="top:40%;right:2%">🐉<br><span>Marius</span></div>
+  <div class="tm tm5" style="bottom:32%;right:10%">🦊<br><span>Kim</span></div>
+  <div class="tm tm6" style="bottom:42%;left:22%">🛡️<br><span>Christian</span></div>
 </div>
 
 <!-- ══ 1 — HOOK ══ -->
 <div class="slide" id="s1">
   <div class="tag">THE HOOK 🪝</div>
-  <h2>How much are you paying<br>for <span style="color:#ff5555">Revit</span> or <span style="color:#ff5555">ArchiCAD</span>?</h2>
+  <h2><span style="color:#ff5555">Revit</span> · <span style="color:#ff5555">ArchiCAD</span> · <span style="color:#ff5555">Tekla</span> · <span style="color:#ff5555">Bentley</span></h2>
   <div class="blocks">
     <div class="block">
       <div class="bicon">💸</div>
@@ -183,81 +285,100 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
       <div class="bdesc">Thousands per seat<br>every year</div>
     </div>
     <div class="block">
-      <div class="bicon">😴</div>
+      <div class="bicon">🥱</div>
       <div class="btitle">What you USE</div>
-      <div class="bdesc">~5% of<br>the features</div>
+      <div class="bdesc">~10% of<br>the features</div>
     </div>
     <div class="block">
-      <div class="bicon">🔒</div>
-      <div class="btitle">Who OWNS it</div>
-      <div class="bdesc">Not you.<br>Never you.</div>
+      <div class="bicon">❓</div>
+      <div class="btitle">What's MISSING</div>
+      <div class="bdesc">The tools you<br>wish existed</div>
     </div>
   </div>
-  <div class="dhh" style="margin-top:14px">
-    <div class="dhh-who">💬 DHH <span>— CTO Basecamp, Creator of Ruby on Rails</span></div>
+  <h3 style="margin-top:10px">&gt; "How much is missing that you wish it had?"</h3>
+  <div class="dhh" style="margin-top:6px">
+    <div class="dhh-who">💬 DHH <span>— on SaaS pricing</span></div>
     <div class="dhh-q">"You're not buying software.<br>You're <em>renting your own workflow back</em><br>from a monopoly — at gunpoint."</div>
   </div>
 </div>
 
-<!-- ══ 2 — ORIGINAL VISION ══ -->
+<!-- ══ 2 — THE DREAM ══ -->
 <div class="slide" id="s2">
-  <div class="tag">THE ORIGINAL VISION — 1970s</div>
-  <h2>One model.<br><span style="color:#55ff55">One truth.</span></h2>
-  <div class="cols">
-    <div class="col">
-      <div class="wiki">
-        <div class="wiki-title">Charles Eastman, 1974 — The BIM Dream</div>
-        <p>A <span class="b">single building database</span>.</p><br>
-        <p>Shared with <span class="g">every stakeholder</span>.</p><br>
-        <p>Across the <span class="g">entire lifecycle</span>.</p><br>
-        <p style="color:#666">Design. Construction. Operations.<br>One model. One truth.</p>
-      </div>
-      <div class="xpw" style="margin-top:10px">
-        <div class="xpf" style="width:100%"></div>
-        <div class="xpl">The Dream — 100% ⚡</div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dhh">
-        <div class="dhh-who">💬 DHH <span>— on what software should be</span></div>
-        <div class="dhh-q">"The best software is<br><em>owned by the people who use it</em>.<br>Not licensed. Not rented.<br>Owned."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ 3 — DID WE GET THERE? ══ -->
-<div class="slide" id="s3">
-  <div class="tag">THE QUESTION</div>
-  <div class="big" style="color:#ffff55">Did we<br>get there?</div>
-  <div style="font-size:11px;color:#444;margin-top:8px;letter-spacing:4px">. . .</div>
-  <div style="margin-top:22px;font-size:8px;color:#666;max-width:500px;line-height:2.4">
-    50 years later.<br>
-    Billions spent.<br>
-    Thousands of licences sold.
-  </div>
-  <div style="margin-top:18px">
-    <div class="xpw" style="max-width:380px">
-      <div class="xpf" style="width:12%; background:#ff5555; box-shadow:0 0 6px #ff5555;"></div>
-      <div class="xpl">The Reality — 12% ⚠️</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ 4 — REALITY ══ -->
-<div class="slide" id="s4">
-  <div class="tag">THE REALITY 💥</div>
-  <h2>What we got:<br><span style="color:#ff5555">Fragmentation.</span></h2>
+  <h3 style="color:#ffff55;letter-spacing:4px;margin-bottom:10px">★ THE DREAM — 1975 ★</h3>
+  <h2>Charles Eastman asked:<br><span style="color:#55ff55">"What if a building was a database<br>before it was a building?"</span></h2>
   <div class="inv-row">
-    <div class="slot"><div class="si">🔷</div><div class="sl">Revit<br>for design</div></div>
-    <div class="slot"><div class="si">🦗</div><div class="sl">Grasshopper<br>for params</div></div>
-    <div class="slot"><div class="si">⚙️</div><div class="sl">Tekla<br>for structure</div></div>
-    <div class="slot"><div class="si">💸</div><div class="sl">3 licences<br>3 formats</div><div class="sc">×3</div></div>
-    <div class="slot"><div class="si">📉</div><div class="sl">IFC transfer<br>= data loss</div><div class="sc">!</div></div>
+    <div class="slot"><div class="si">📦</div><div class="sl">One model<br>not documents</div></div>
+    <div class="slot"><div class="si">🧠</div><div class="sl">Smart objects<br>not just geometry</div></div>
+    <div class="slot"><div class="si">🔄</div><div class="sl">Changes<br>propagate</div></div>
+    <div class="slot"><div class="si">♾️</div><div class="sl">Model lives<br>as long as building</div></div>
   </div>
-  <div class="dhh" style="margin-top:12px">
-    <div class="dhh-who">💬 DHH <span>— on enterprise software lock-in</span></div>
-    <div class="dhh-q">"3 licences. 3 formats. 3 headaches.<br>That's not a toolchain.<br><em>That's a hostage situation.</em>"</div>
+  <div class="dhh" style="margin-top:8px">
+    <div class="dhh-who">💬 DHH <span>— on what software should be</span></div>
+    <div class="dhh-q">"The best software is<br><em>owned by the people who use it.</em><br>Not licensed. Not rented. Owned."</div>
+  </div>
+  <div class="xpw" style="margin-top:8px;max-width:360px">
+    <div class="xpf" style="width:100%"></div>
+    <div class="xpl">The Dream — 100% ⚡</div>
+  </div>
+</div>
+
+<!-- ══ 3 — WHAT FAILED ══ -->
+<div class="slide" id="s3">
+  <div class="tag">50 YEARS LATER 💀</div>
+  <h2>What <span style="color:#ff5555">failed</span> — and why</h2>
+  <div class="blocks">
+    <div class="block">
+      <div class="bicon">💰</div>
+      <div class="btitle">The "I" died</div>
+      <div class="bdesc">Geometry sold licences.<br>Information didn't.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">🔒</div>
+      <div class="btitle">Vendors split<br>the model</div>
+      <div class="bdesc">Revit, Tekla, ArchiCAD.<br>Each proprietary.<br>Data lost in translation.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">⚰️</div>
+      <div class="btitle">Model dies<br>at handover</div>
+      <div class="bdesc">No one paid to keep<br>it alive for 30 years.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">📉</div>
+      <div class="btitle">Productivity<br>stagnated</div>
+      <div class="bdesc">Construction: the only<br>industry standing still.</div>
+    </div>
+  </div>
+  <div class="stats" style="margin-top:8px">
+    <div class="stat"><div class="sn" style="color:#ff5555">$177B</div><div class="su">lost per year<br>in the US alone</div></div>
+    <div class="stat"><div class="sn" style="color:#ff5555">35%</div><div class="su">of the week<br>wasted</div></div>
+    <div class="stat"><div class="sn" style="color:#ff5555">50</div><div class="su">years<br>still broken</div></div>
+  </div>
+</div>
+
+<!-- ══ 4 — INDUSTRY RESPONSE ══ -->
+<div class="slide" id="s4">
+  <div class="tag">THE INDUSTRY'S BETS 🎰</div>
+  <h2>How the industry is <span style="color:#ffff55">trying to fix it</span></h2>
+  <div class="blocks">
+    <div class="block">
+      <div class="bicon">📋</div>
+      <div class="btitle">ISO 19650</div>
+      <div class="bdesc">Right principle.<br>Can't fix incompatible<br>tools underneath.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">🌐</div>
+      <div class="btitle">OpenBIM / IFC</div>
+      <div class="bdesc">Right destination.<br>Still a file format,<br>not a live data model.</div>
+    </div>
+    <div class="block">
+      <div class="bicon">🪞</div>
+      <div class="btitle">Digital Twins</div>
+      <div class="bdesc">Right vision.<br>Wrong foundation.<br>Built on broken data.</div>
+    </div>
+  </div>
+  <div class="dhh" style="margin-top:8px">
+    <div class="dhh-who">💬 DHH <span>— on vendor lock-in</span></div>
+    <div class="dhh-q">"Vendor lock-in isn't a side effect.<br><em>It's the business model.</em><br>They don't sell you software.<br>They sell you the impossibility of leaving."</div>
   </div>
 </div>
 
@@ -279,12 +400,12 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
     <div class="block">
       <div class="bicon">🤖</div>
       <div class="btitle">Vibe-Code It</div>
-      <div class="bdesc">Feature doesn't exist?<br>Describe it. Generate it.<br>Share it back.</div>
+      <div class="bdesc">Describe it.<br>Generate it.<br>Share it back.</div>
     </div>
   </div>
-  <div class="dhh" style="margin-top:12px">
+  <div class="dhh" style="margin-top:6px">
     <div class="dhh-who">💬 DHH <span>— on monopoly software</span></div>
-    <div class="dhh-q">"The antidote to monopoly software<br>isn't a <em>better monopoly</em>.<br>It's giving people the tools<br>to <em>build their own.</em>"</div>
+    <div class="dhh-q">"The antidote to monopoly software<br>isn't <em>a better monopoly.</em><br>It's giving people the tools<br>to <em>build their own.</em>"</div>
   </div>
 </div>
 
@@ -296,18 +417,21 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
     <div class="col">
       <div class="wiki">
         <div class="wiki-title">Cunningham's Law + AI Governance</div>
-        <p><span class="g">"The best way to get the right answer on the internet is not to ask — it's to post the wrong answer."</span></p><br>
-        <p>Features get reviewed, tested and improved by the community.<br>An <span class="b">AI governance layer</span> prevents features from <span class="r">breaking your project.</span></p><br>
+        <p><span class="g">"The best way to get the right answer is not to ask — it's to post the wrong answer."</span></p><br>
+        <p>Features are reviewed, tested and improved by the community. An <span class="b">AI governance layer</span> prevents features from <span class="r">breaking your project.</span></p><br>
         <p><span class="b">IT-savvy?</span> Run it on your own infra.<br>
-        <span class="b">Not?</span> Buy it managed. Same trust either way.</p>
+        <span class="b">Not?</span> Buy it managed. Same trust.</p>
       </div>
     </div>
     <div class="col">
-      <div class="inv-row" style="margin-top:0; flex-direction:column; align-items:center; gap:6px">
-        <div class="slot" style="width:100%;max-width:200px;height:48px;flex-direction:row;gap:8px"><div class="si" style="font-size:18px">👁️</div><div class="sl">Peer review</div></div>
-        <div class="slot" style="width:100%;max-width:200px;height:48px;flex-direction:row;gap:8px"><div class="si" style="font-size:18px">⭐</div><div class="sl">Community rating</div></div>
-        <div class="slot" style="width:100%;max-width:200px;height:48px;flex-direction:row;gap:8px"><div class="si" style="font-size:18px">🛡️</div><div class="sl">AI Gov Layer</div></div>
-        <div class="slot" style="width:100%;max-width:200px;height:48px;flex-direction:row;gap:8px"><div class="si" style="font-size:18px">🔒</div><div class="sl">Trust framework</div></div>
+      <div class="dhh">
+        <div class="dhh-who">💬 DHH <span>— on open source trust</span></div>
+        <div class="dhh-q">"Open source isn't trusted<br>because someone <em>promised</em><br>it works.<br>It's trusted because<br><em>anyone can verify</em> it does."</div>
+      </div>
+      <div class="inv-row" style="margin-top:8px">
+        <div class="slot" style="width:64px;height:44px;flex-direction:row;gap:6px"><div class="si" style="font-size:16px">👁️</div><div class="sl">Peer review</div></div>
+        <div class="slot" style="width:64px;height:44px;flex-direction:row;gap:6px"><div class="si" style="font-size:16px">⭐</div><div class="sl">Community</div></div>
+        <div class="slot" style="width:64px;height:44px;flex-direction:row;gap:6px"><div class="si" style="font-size:16px">🛡️</div><div class="sl">AI Gov</div></div>
       </div>
     </div>
   </div>
@@ -317,12 +441,16 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
 <div class="slide" id="s7">
   <div class="tag">LIVE DEMO 🌬️</div>
   <h2>We built a <span style="color:#55ff55">wind farm</span><br>from a prompt.</h2>
-  <div style="display:flex;flex-direction:column;gap:8px;width:100%;max-width:600px;margin-top:10px">
+  <div class="ant" style="max-width:580px">
+    <div class="ant-who">🏗️ ANTONIO <span>— That Open Company</span></div>
+    <div class="ant-q">"139,583 beams, columns, bolts,<br>handrails and more.<br><em>70 MB of RAM. 60 fps. 30 lines of code.</em><br>Free and open source. 🤘🏻"</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;width:100%;max-width:580px;margin-top:10px">
     <div class="ach"><div class="aico">🌬️</div><div><div class="at2">ACHIEVEMENT UNLOCKED</div><div class="ad2">100 turbines — Horns Rev spacing — 1 click</div></div></div>
     <div class="ach"><div class="aico">🌊</div><div><div class="at2">ACHIEVEMENT UNLOCKED</div><div class="ad2">Ocean Waves — animated North Sea from a prompt</div></div></div>
     <div class="ach"><div class="aico">🤖</div><div><div class="at2">ACHIEVEMENT UNLOCKED</div><div class="ad2">Vibe Coder — BIM tool from plain language in 10s</div></div></div>
   </div>
-  <div class="chat" style="margin-top:10px;max-width:600px">
+  <div class="chat" style="margin-top:8px;max-width:580px">
     <div class="cl">[ TRY IT NOW ]</div>
     <div class="cm">&gt; <span>http://localhost:4000</span><span class="cur"></span></div>
   </div>
@@ -332,17 +460,21 @@ h3    { font-size:clamp(9px,1.3vw,16px); color:#55ffff; text-shadow:1px 1px #000
 <div class="slide" id="s8">
   <div class="tag">THE CLOSE 🌟</div>
   <h2>Linux. Blender. VS Code.<br><span style="color:#ffff55">Now BIM.</span></h2>
-  <div class="dhh" style="margin-top:10px">
-    <div class="dhh-who">💬 DHH <span>— on what open source builds</span></div>
-    <div class="dhh-q">"Linux didn't ask Oracle for permission.<br>Blender didn't wait for Autodesk.<br><em>Neither should we.</em>"</div>
+  <div class="dhh" style="max-width:600px">
+    <div class="dhh-who">💬 DHH <span>— on building the future</span></div>
+    <div class="dhh-q">"Linux didn't ask Oracle for permission.<br>Blender didn't wait for Autodesk.<br>Rails didn't need IBM's blessing.<br><em>Neither should you.</em>"</div>
   </div>
-  <div class="stats" style="margin-top:14px">
+  <div class="ant" style="max-width:600px;margin-top:8px">
+    <div class="ant-who">🏗️ ANTONIO <span>— That Open Company</span></div>
+    <div class="ant-q">"The future of AEC is open. <em>Let's build it together.</em> 🤘🏻"</div>
+  </div>
+  <div class="stats" style="margin-top:12px">
     <div class="stat"><div class="sn" style="color:#55ff55">10s</div><div class="su">idea → tool</div></div>
     <div class="stat"><div class="sn" style="color:#55ffff">∞</div><div class="su">tools possible</div></div>
     <div class="stat"><div class="sn" style="color:#ffff55">0</div><div class="su">lines written<br>by user</div></div>
     <div class="stat"><div class="sn" style="color:#ff55ff">v0.1</div><div class="su">alpha<br>it's real 🔥</div></div>
   </div>
-  <div style="margin-top:12px;font-size:7px;color:#444">Made with love in Copenhagen 🇩🇰</div>
+  <div style="margin-top:10px;font-size:8px;color:#444">Made with love in Copenhagen 🇩🇰</div>
 </div>
 
 </div><!-- /deck -->
